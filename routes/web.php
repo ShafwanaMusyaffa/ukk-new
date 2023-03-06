@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AssetController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LelangController;
 use App\Http\Controllers\ProfileController;
 
@@ -27,32 +28,30 @@ use App\Http\Controllers\ProfileController;
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
 
 require __DIR__.'/auth.php';
 
 // Route::get('/', function () {
-//     return view('welcome');
-// });
+    //     return view('welcome');
+    // });
+    
+Route::middleware('auth')->group(function () {
+    Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
 
-
-Route::get('/', function () {
-    return view('welcome');
+    Route::resource('/admin/assets', AssetController::class);
+    
 });
 
+Route::get('/', function () {
+    return view('pages.home');
+});
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::resource('/u', UserController::class);
 
 Route::get('/u/{u}/pro', [UserController::class, 'promote'])->name('u.promote');
 Route::get('/u/{u}/dem', [UserController::class, 'demote'])->name('u.demote');
 
-Route::resource('/assets', AssetController::class);
 
 Route::get('lelang/create/{asset}', [LelangController::class, 'create'])->name('lelang.create');
 Route::post('lelang/{asset}', [LelangController::class, 'store'])->name('lelang.store');

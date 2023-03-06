@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('css-plugin')
 <link rel="stylesheet" href="{{ asset('vendor/select2/dist/css/select2.css') }}">
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="card-body">
-            <form method="post" action="{{ url('/assets/'. $asset->id) }}">
+            <form method="post" action="{{ url('/admin/assets/'. $asset->id) }}">
                 @csrf
                 @method('put')
                 <div class="form-group">

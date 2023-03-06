@@ -1,194 +1,164 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>Selamat Datang - Lelangin</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+  <!-- Favicons -->
+  <link href="/asset/img/logo.png" rel="icon">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('vendor/fontawesome-free/css/all.css') }}" rel="stylesheet">
-    @yield('css-plugin')
-    <link href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="/asset/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="/asset/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/asset/vendor/DataTables/datatables.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/asset/css/client.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.5.0
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to to the body tag
-to get the desired effect
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
-<body class="hold-transition sidebar-mini">
-    <div class="wrapper">
-        <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ url('/home') }}" class="nav-link">Home</a>
-                </li>
-                @if(Auth::user()->is_admin)
-                <li class="nav-item  d-none d-sm-inline-block">
-                    <a class="nav-link" href="{{ url('/report') }}">Laporan</a>
-                </li>
-                @endif
-            </ul>
 
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a class="nav-link" href="{{ url('/logout') }}" onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">Logout</a>
-                    <form id="logout-form" style="display: none;" action="{{ url('/logout') }}" method="post">
-                        @csrf
-                    </form>
-                </li>
-            </ul>
-        </nav>
-        <!-- /.navbar -->
+<body>
 
-        <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <!-- Brand Logo -->
-            <a href="{{ url('/') }}" class="brand-link">
-                <img src="{{ asset('vendor/adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">{{ config('app.name', 'Laravel') }}</span>
+  <!-- Main -->
+  <main>
+
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm fixed-top">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#">
+          <img src="/asset/img/logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top me-1">
+          Lelang
+        </a>    
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Cari</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Penawaran</a>
+            </li>
+          </ul>
+          @if (Auth::user())
+            <button type="button" class="btn btn-outline-primary dropdown-toggle text-capitalize" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle me-1"></i>
+              {{ Auth::user()->nama_lengkap }}
+            </button>
+          <div class="btn-group">
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <form action="{{ route('logout') }}" method="post">
+                  @csrf
+                  <button class="dropdown-item" type="submit">Logout</button>
+                </form>
+              </li>
+            </ul>
+          </div>
+          @elseif (Auth::user()->is_admin)
+            <button type="button" class="btn btn-outline-primary dropdown-toggle text-capitalize" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle me-1"></i>
+              {{ Auth::user()->nama_lengkap }}
+            </button>
+          <div class="btn-group">
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a href="{{ route('dashboard') }}">Dashboard</a>
+              </li>
+              <li>
+                <form action="{{ route('logout') }}" method="post">
+                  @csrf
+                  <button class="dropdown-item" type="submit">Logout</button>
+                </form>
+              </li>
+            </ul>
+          </div>
+          @else
+          <div class="d-flex justify-content-end gap-2">
+            <a href="{{ route('login') }}" class="btn btn-primary">
+              <i class="bi bi-box-arrow-in-right"></i>
             </a>
-
-            <!-- Sidebar -->
-            <div class="sidebar">
-                <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="{{ asset('storage/profile/' . Auth::user()->image) }}" class="img-circle elevation-2" alt="User Image">
-                    </div>
-                    <div class="info">
-                        <a href="{{ url('/u/' . Auth::user()->id) }}" class="d-block">{{ Auth::user()->nama_lengkap }}</a>
-                    </div>
-                </div>
-
-                <!-- Sidebar Menu -->
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-user"></i>
-                                <p>
-                                    Kelola Akun
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ url('/u/' . Auth::user()->id) }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Profile</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ubah Password</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        @if(Auth::user()->is_admin)
-                        <li class="nav-item">
-                            <a href="{{ url('/u') }}" class="nav-link">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p>
-                                    Kelola Pengguna
-                                </p>
-                            </a>
-                        </li>
-                        @endif
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-cart-plus"></i>
-                                <p>
-                                    Transaksi
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ url('/lelang') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ikut lelang</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ url('/assets') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Jual</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-                <!-- /.sidebar-menu -->
-            </div>
-            <!-- /.sidebar -->
-        </aside>
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            @hasSection('content-blank')
-            @yield('content-blank')
-            @else
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                    <h1 class="m-0 text-dark">@yield('content-header')</h1>
-                </div><!-- /.container-fluid -->
-            </div>
-            <!-- /.content-header -->
-
-            <!-- Main content -->
-            <div class="content">
-                <section class="container-fluid">
-                    @yield('content')
-                </section>
-                <!-- /.container-fluid -->
-            </div>
-            <!-- /.content -->
-            @endif
+          </div>
+              
+          @endif
         </div>
-        <!-- /.content-wrapper -->
+      </div>
+    </nav>
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+    @yield('content')
 
-        <!-- Main Footer -->
-        <footer class="main-footer">
-            <strong>Copyright &copy; 2020 <i>Fany Muhammad Fahmi Kamilah</i>.</strong>
-        </footer>
-    </div>
-    <!-- ./wrapper -->
+    <!-- Footer -->
+    <footer class="bg-light">
+      <div class="container py-4">
+        <div class="row justify-content-between">
+          <div class="col-12 col-lg-6">
+            <h1 class="fw-bold text-black mb-1">Lelang</h1>
+            <p class="mb-0">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti error cum dolores unde et, eaque nostrum reprehenderit ipsam assumenda debitis.
+            </p>
+          </div>
+          <div class="col-12 col-lg-6 d-flex justify-content-center justify-content-md-end">
+            <div class="w-fit">
+              <h3 class="mb-2 fw-bold">Ikuti Kami</h3>
+              <div class="d-flex align-items-center gap-2">
+                <a href="" class="btn btn-primary p-2 rounded-full mb-0">
+                  <i class="bi bi-instagram"></i>
+                </a>
+                <a href="" class="btn btn-primary p-2 rounded-full mb-0">
+                  <i class="bi bi-twitter"></i>
+                </a>
+                <a href="" class="btn btn-primary p-2 rounded-full mb-0">
+                  <i class="bi bi-facebook"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
+  </main>
+  <!-- End #main -->
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    @yield('js-plugin')
-    <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
-    @yield('js')
+  
+
+
+
+  <!-- Vendor JS Files -->
+  <script src="/asset/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="/asset/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/asset/vendor/chart.js/chart.umd.js"></script>
+  <script src="/asset/vendor/echarts/echarts.min.js"></script>
+  <script src="/asset/vendor/quill/quill.min.js"></script>
+  <script src="/asset/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="/asset/vendor/tinymce/tinymce.min.js"></script>
+  <script src="/asset/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/asset/js/jquery-3.6.3.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+  <script src="/asset/vendor/DataTables/datatables.js"></script>
+  <script src="/asset/js/numeral.js"></script>
+  <script src="/asset/js/client.js"></script>
+
 </body>
-</html>
+
+</html>s

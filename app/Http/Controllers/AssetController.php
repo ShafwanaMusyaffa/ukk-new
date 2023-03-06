@@ -36,7 +36,7 @@ class AssetController extends Controller
             }
         });
 
-        return view('asset.index', compact('assets'));
+        return view('pages.admin.asset.index', compact('assets'));
     }
 
     /**
@@ -47,7 +47,7 @@ class AssetController extends Controller
     public function create()
     {
         $genres = Genre::all();
-        return view('asset.create', compact('genres'));
+        return view('pages.admin.asset.create', compact('genres'));
     }
 
     /**
@@ -90,7 +90,7 @@ class AssetController extends Controller
      */
     public function show(Asset $asset)
     {
-        return view('asset.show', ['asset' => $asset]);
+        return view('pages.admin.asset.show', ['asset' => $asset]);
     }
 
     /**
@@ -103,7 +103,7 @@ class AssetController extends Controller
     {
         $genres = Genre::all();
 
-        return view('asset.edit', ['asset' => $asset, 'genres' => $genres]);
+        return view('pages.admin.asset.edit', ['asset' => $asset, 'genres' => $genres]);
     }
 
     /**
