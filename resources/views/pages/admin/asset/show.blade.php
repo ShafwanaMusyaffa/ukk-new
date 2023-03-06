@@ -1,5 +1,48 @@
 @extends('layouts.admin')
 
+@section('content')
+    <div class="pagetitle">
+      <div>
+        <h1>Lelang Berlangsung</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="index.html">Lelang</a></li>
+            <li class="breadcrumb-item active">{{ $asset->game }}</li>
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+    
+    <section class="section dashboard">
+      <div class="card pt-4">
+        <div class="card-body row g-4">
+            <div class="col-10 col-md-3 mx-auto">
+                <div class="w-100 ratio ratio-1x1 overflow-hidden rounded-3">
+                    <div class="w-100">
+                        <img src="/asset/img/product-1.jpg" alt="" class="h-100">
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-9">
+                <h3 class="fw-bold">{{ $asset->game }}</h3>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><strong>Vendor: {{ $asset->identifier }}</strong></li>
+                </ul>
+                <p class="mb-2">{{ $asset->deskripsi }}</p>
+                <a href="edit-produk.html" class="btn btn-outline-primary">Edit</a>
+                <form action="{{ url('/admin/assets/' . $asset->id) }}" method="post" class="d-flex justify-content-end gap-2">
+                    @csrf
+                    @method('delete')
+                  <button type="submit" onclick="confirm('Yakin akan menghapus produk {{ $asset->game }}?')" class="btn btn-danger">Hapus</button>
+                </form>
+            </div>
+        </div>
+      </div>
+
+    </section>
+@endsection
+
 @section('content-header', 'Detail Asset')
 
 @section('content')

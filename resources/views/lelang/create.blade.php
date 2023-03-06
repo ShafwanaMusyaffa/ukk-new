@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content-header','Jual akun')
 
@@ -31,7 +31,7 @@
                         @endforeach
                     </ul>
                     <div class="text-center mt-5 mb-3">
-                        <a href="{{ url('/assets/' . $asset->id . '/edit') }}" class="btn btn-sm btn-info"><i class="fas fa-pencil-alt"></i>Edit</a>
+                        <a href="{{ url('/admin/assets/' . $asset->id . '/edit') }}" class="btn btn-sm btn-info"><i class="fas fa-pencil-alt"></i>Edit</a>
                         {{-- <button href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete-account-modal"><i class="fas fa-trash"></i>Hapus</button> --}}
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form method="post" id="form-harga" action="{{ url('/lelang/' . $asset->id) }}">
+                <form method="post" id="form-harga" action="{{ url('/admin/lelang/' . $asset->id) }}">
                     @csrf
                     <div class="form-group">
                         <label for="harga_awal">Harga awal</label>

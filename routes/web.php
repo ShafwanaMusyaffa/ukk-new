@@ -53,11 +53,11 @@ Route::get('/u/{u}/pro', [UserController::class, 'promote'])->name('u.promote');
 Route::get('/u/{u}/dem', [UserController::class, 'demote'])->name('u.demote');
 
 
-Route::get('lelang/create/{asset}', [LelangController::class, 'create'])->name('lelang.create');
-Route::post('lelang/{asset}', [LelangController::class, 'store'])->name('lelang.store');
+Route::get('admin/lelang/create/{asset}', [LelangController::class, 'create'])->name('lelang.create');
+Route::post('admin/lelang/{asset}', [LelangController::class, 'store'])->name('lelang.store');
 Route::get('/lelang/{lelang}/tawar', [LelangController::class, 'tawar'])->name('lelang.tawar');
-Route::delete('lelang/{lelang}', [LelangController::class, 'akhiri'])->name('lelang.akhiri');
-Route::resource('lelang', LelangController::class)->only([
+Route::delete('admin/lelang/{lelang}', [LelangController::class, 'akhiri'])->name('lelang.akhiri');
+Route::resource('/lelang', LelangController::class)->only([
     'index', 'update', 'show'
 ]);
 

@@ -1,6 +1,77 @@
 @extends('layouts.app')
 
+
+@section('content')
+    <section class="py-5">
+      <div class="container pt-5">
+        <div class="card border-0 shadow-sm mb-3">
+          <div class="card-body row">
+            <div class="col-12 col-md-4">
+              <div class="w-100 ratio ratio-1x1 overflow-hidden rounded-3">
+                <div class="w-100">
+                  <img src="/assets/img/card.jpg" alt="" class="h-100">
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-8">
+              <h1 class="fw-bold">Lelang Barang</h1>
+              <span class="badge bg-warning mb-2">
+                <i class="bi bi-clock me-1"></i>
+                1 Hari
+              </span>
+              <p class="mb-0 text-black">Penawaran Tertinggi</p>
+              <h4 class="fw-bold">Rp. {{ number_format($lelang->harga_sekarang, 2, ',', '.') }}</h4>
+              <p class="mb-0">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut optio velit facere accusantium dicta? Reiciendis culpa possimus quaerat animi facere!
+              </p>
+              <div class="mt-4">
+                <h3 class="mb-2">Lelang Sekarang</h3>
+                    @if(Auth::user()->id == $lelang->user->id)
+                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete-account-modal"><i class="fas fa-exclamation"></i> Akhiri lelang</button>
+                    @else
+                        <form action="{{ route('lelang.update', $lelang->id) }}" class="d-flex w-100 justify-content-between gap-2" method="post">
+                            @csrf
+                            @method('put')
+
+                            <input type="number" class="form-control" id="harga_awal" name="harga_tawaran" placeholder="Rp. 20000">
+                            <button type="submit" class="btn btn-primary">Tawarkan</button>
+                        </form>
+                    @endif
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h3>Riwayat Penawaran</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Nama</th>
+                  <th scope="col">Waktu</th>
+                  <th scope="col">Penawaran</th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+                @foreach($lelang->logs as $log)
+                <tr>
+                  <td>{{ $log->user->nama_lengkap }}</td>
+                  <td>{{ $log->created_at->format('H:i') }}</td>
+                  <td class="fw-bold">Rp. {{ number_format($lelang->harga_sekarang, 2, ',', '.') }}</span></td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+@endsection
+
 @section('content-header', 'Detail Lelang')
+
 
 @section('content')
 <!-- Default box -->

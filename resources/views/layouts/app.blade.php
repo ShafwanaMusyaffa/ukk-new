@@ -73,24 +73,6 @@
               </li>
             </ul>
           </div>
-          @elseif (Auth::user()->is_admin)
-            <button type="button" class="btn btn-outline-primary dropdown-toggle text-capitalize" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-person-circle me-1"></i>
-              {{ Auth::user()->nama_lengkap }}
-            </button>
-          <div class="btn-group">
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li>
-                <a href="{{ route('dashboard') }}">Dashboard</a>
-              </li>
-              <li>
-                <form action="{{ route('logout') }}" method="post">
-                  @csrf
-                  <button class="dropdown-item" type="submit">Logout</button>
-                </form>
-              </li>
-            </ul>
-          </div>
           @else
           <div class="d-flex justify-content-end gap-2">
             <a href="{{ route('login') }}" class="btn btn-primary">

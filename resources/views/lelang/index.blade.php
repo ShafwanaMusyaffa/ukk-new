@@ -1,6 +1,39 @@
 @extends('layouts.app')
 
-@section('content-blank')
+@section('content')
+    <section class="py-5">
+      <div class="container pt-5">
+        <div class="row g-4">
+            @foreach($lelang as $lelang)
+                <div class="col-6 col-md-4 col-xl-3">
+                    <div class="card shadow-sm">
+                    <div class="w-100 ratio ratio-1x1 overflow-hidden">
+                        <span>
+                        <img src="/asset/img/card.jpg" alt="{{ $lelang->asset->game }}" class="h-100">
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <span class="badge bg-warning mb-2">
+                        <i class="bi bi-clock me-1"></i>
+                        {{ $lelang->waktu_berakhir->format('d M, Y') }}
+                        </span>
+                        <a href="{{ url('/lelang/' . $lelang->id) }}" class="text-black text-decoration-none">
+                        <h4 class="fw-semibold">{{ $lelang->asset->game }}</h4>
+                        </a>
+                        <p class="mb-0">Penawaran tertinggi</p>
+                        <p class="mb-0 fs-5 fw-semibold pb-3">Rp. {{ number_format($lelang->harga_sekarang, 2, ',', '.') }}</p>
+                        <a href="{{ url('/lelang/' . $lelang->id) }}" class="btn w-100 btn-success">Lelang</a>
+                    </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+      </div>
+    </section>
+@endsection
+
+
+{{-- @section('content')
 <!-- Main content -->
 <section class="content">
     <!-- Default box -->
@@ -61,4 +94,4 @@
 
 </section>
 <!-- /.content -->
-@endsection
+@endsection --}}

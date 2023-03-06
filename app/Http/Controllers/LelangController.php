@@ -119,7 +119,7 @@ class LelangController extends Controller
         $lelang->save();
         $lelang->logs()->save($lelang_log);
 
-        return redirect()->action('LelangController@show', [$lelang->id]);
+        return redirect()->route('lelang.show', [$lelang->id]);
     }
 
     /**
@@ -133,6 +133,6 @@ class LelangController extends Controller
         $lelang->status = false;
         $lelang->save();
 
-        return redirect()->action('AssetController@index');
+        return redirect()->route('lelang.index');
     }
 }

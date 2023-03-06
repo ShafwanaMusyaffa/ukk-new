@@ -68,17 +68,14 @@
                                 Hapus
                                 </button>
                             </form>
-                            <a href="{{ url('/admin/assets/' . $asset->id . '/edit') }}" class="btn btn-primary">
-                                Edit
-                            </a>
                             <a href="{{ ($asset->lelang) ? url('/admin/lelang/' . $asset->id) : url('/admin/assets/' . $asset->id) }}" class="btn btn-warning">
                                 Detail
                             </a>
                             @if(!$asset->lelang)
-                                <a class="btn btn-success" href="{{ url('/lelang/create/' . $asset->id) }}">
+                                <a class="btn btn-success" href="{{ url('/admin/lelang/create/' . $asset->id) }}">
                                     <i class="fas fa-shopping-cart"></i> Jual
                                 </a>
-                                <a class="btn btn-info" href="{{ url('/assets/' . $asset->id . '/edit') }}">
+                                <a class="btn btn-info" href="{{ url('/admin/assets/' . $asset->id . '/edit') }}">
                                     <i class="fas fa-pencil-alt"></i> Edit
                                 </a>
                             @endif
