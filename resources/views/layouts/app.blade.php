@@ -58,29 +58,35 @@
               <a class="nav-link" href="#">Penawaran</a>
             </li>
           </ul>
-          @if (Auth::user())
-            <button type="button" class="btn btn-outline-primary dropdown-toggle text-capitalize" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-person-circle me-1"></i>
-              {{ Auth::user()->nama_lengkap }}
-            </button>
-          <div class="btn-group">
+        @if (Auth::user())
+        <button type="button" class="btn btn-outline-primary dropdown-toggle text-capitalize" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-circle me-1"></i>
+            {{ Auth::user()->nama_lengkap }}
+        </button>
+        <div class="btn-group">
             <ul class="dropdown-menu dropdown-menu-end">
-              <li>
+            @if(Auth::user()->is_admin == true)
+                <li>
+                <a class="dropdown-item" href="{{ route('dashboard') }}">
+                    <i class="bi bi-speedometer2 me-2"></i>Dashboard
+                </a>
+                </li>
+            @endif
+            <li>
                 <form action="{{ route('logout') }}" method="post">
-                  @csrf
-                  <button class="dropdown-item" type="submit">Logout</button>
+                @csrf
+                <button class="dropdown-item" type="submit">Logout</button>
                 </form>
-              </li>
+            </li>
             </ul>
-          </div>
-          @else
-          <div class="d-flex justify-content-end gap-2">
+        </div>
+        @else
+        <div class="d-flex justify-content-end gap-2">
             <a href="{{ route('login') }}" class="btn btn-primary">
-              <i class="bi bi-box-arrow-in-right"></i>
+            <i class="bi bi-box-arrow-in-right"></i>
             </a>
-          </div>
-              
-          @endif
+        </div>
+        @endif
         </div>
       </div>
     </nav>

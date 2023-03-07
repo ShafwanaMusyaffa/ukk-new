@@ -14,7 +14,7 @@
               </div>
             </div>
             <div class="col-12 col-md-8">
-              <h1 class="fw-bold">Lelang Barang</h1>
+              <h1 class="fw-bold">{{ $lelang->asset->game }}</h1>
               <span class="badge bg-warning mb-2">
                 <i class="bi bi-clock me-1"></i>
                 1 Hari
@@ -22,12 +22,17 @@
               <p class="mb-0 text-black">Penawaran Tertinggi</p>
               <h4 class="fw-bold">Rp. {{ number_format($lelang->harga_sekarang, 2, ',', '.') }}</h4>
               <p class="mb-0">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut optio velit facere accusantium dicta? Reiciendis culpa possimus quaerat animi facere!
+                {{ $lelang->asset->deskripsi }}
               </p>
               <div class="mt-4">
                 <h3 class="mb-2">Lelang Sekarang</h3>
                     @if(Auth::user()->id == $lelang->user->id)
-                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete-account-modal"><i class="fas fa-exclamation"></i> Akhiri lelang</button>
+                    <form action="{{ route('lelang.akhiri', $lelang->id) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button class="btn btn-sm btn-danger" type="submit" onclick="confirm('Yakin ingin mengakhiri lelang?')"> Akhiri lelang</button>
+                    </form>
+
                     @else
                         <form action="{{ route('lelang.update', $lelang->id) }}" class="d-flex w-100 justify-content-between gap-2" method="post">
                             @csrf
@@ -46,30 +51,35 @@
         <div class="card border-0 shadow-sm">
           <div class="card-body">
             <h3>Riwayat Penawaran</h3>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Nama</th>
-                  <th scope="col">Waktu</th>
-                  <th scope="col">Penawaran</th>
-                </tr>
-              </thead>
-              <tbody class="table-group-divider">
-                @foreach($lelang->logs as $log)
-                <tr>
-                  <td>{{ $log->user->nama_lengkap }}</td>
-                  <td>{{ $log->created_at->format('H:i') }}</td>
-                  <td class="fw-bold">Rp. {{ number_format($lelang->harga_sekarang, 2, ',', '.') }}</span></td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
+            @if($lelang->logs->count() > 0)
+                <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Waktu</th>
+                    <th scope="col">Penawaran</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    @foreach($lelang->logs->sortByDesc('harga') as $log)
+
+                    <tr>
+                    <td>{{ $log->user->nama_lengkap }}</td>
+                    <td>{{ $log->created_at->format('d M Y, h:i') }}</td>
+                    <td class="fw-bold">Rp. {{ number_format($log->harga, 2, ',', '.') }}</span></td>
+                    </tr>
+
+                    @endforeach
+                </tbody>
+                </table>
+            @else
+                <p class="text-center">Belum ada penawaran.</p>
+            @endif
           </div>
         </div>
       </div>
     </section>
 @endsection
-
 @section('content-header', 'Detail Lelang')
 
 
@@ -142,11 +152,9 @@
                             <!-- END timeline item -->
                             <!-- timeline item -->
                             @foreach($lelang->logs as $log)
-                            @if($time != $log->created_at->format('d M, Y'))
                             <div class="time-label">
                                 <span class="bg-green">{{ $log->created_at->format('d M, Y') }}</span>
                             </div>
-                            @endif
                             <div>
                                 <i class="fas fa-comments bg-green"></i>
                                 <div class="timeline-item">
@@ -154,9 +162,6 @@
                                     <h3 class="timeline-header no-border"><a href="{{ url('/u/' . $log->user->id) }}">{{ $log->user->nama_lengkap }}</a> Menawar seharga {{ $log->harga }}</h3>
                                 </div>
                             </div>
-                            @php
-                            $time = $log->created_at->format('d M, Y')
-                            @endphp
                             @endforeach
                             <!-- END timeline item -->
                             <!-- timeline item -->

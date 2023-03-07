@@ -22,7 +22,9 @@ class LelangController extends Controller
      */
     public function index()
     {
-        $lelang = Lelang::where(['status' => 1])->get();
+        $lelang = Lelang::where('status', 1)
+                        ->orderBy('harga_sekarang', 'desc')
+                        ->get();
 
         return view('lelang.index', ['lelang' => $lelang]);
     }
@@ -83,7 +85,8 @@ class LelangController extends Controller
      */
     public function show(Lelang $lelang)
     {
-        return view('lelang.show', ['lelang' => $lelang]);
+        $penawaran = $lelang->orderBy('harga_sekarang', 'desc')->get();
+        return view('lelang.show', ['lelang' => $lelang, 'penawaran' => $penawaran]);
     }
 
     /**
@@ -132,6 +135,13 @@ class LelangController extends Controller
     {
         $lelang->status = false;
         $lelang->save();
+
+    // Menentukan pemenang lelang
+        $penawaranTertinggi = $lelang->orderBy('harga_sekarang', 'desc')->first();
+        if ($penawaranTertinggi) {
+            $lelang->pemenang_id = $penawaranTertinggi->user_id;
+            $lelang->save();
+        }
 
         return redirect()->route('lelang.index');
     }

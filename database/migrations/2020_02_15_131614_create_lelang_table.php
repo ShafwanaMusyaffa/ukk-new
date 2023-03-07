@@ -17,12 +17,14 @@ class CreateLelangTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('asset_id');
+            $table->unsignedBigInteger('pemenang_id')->nullable();
             $table->integer('harga_awal');
             $table->integer('harga_sekarang');
             $table->date('waktu_berakhir');
             $table->timestamps();
             $table->boolean('status');
-
+            
+            $table->foreign('pemenang_id')->references('id')->on('users')->onDelete('set null');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('asset_id')->references('id')->on('assets')->onDelete('cascade');
         });

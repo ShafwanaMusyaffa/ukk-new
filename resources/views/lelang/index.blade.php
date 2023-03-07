@@ -3,6 +3,7 @@
 @section('content')
     <section class="py-5">
       <div class="container pt-5">
+        @if(count($lelang) > 0)
         <div class="row g-4">
             @foreach($lelang as $lelang)
                 <div class="col-6 col-md-4 col-xl-3">
@@ -28,6 +29,9 @@
                 </div>
             @endforeach
         </div>
+        @else
+        <p class="text-center">Belum ada lelang yang tersedia.</p>
+        @endif
       </div>
     </section>
 @endsection

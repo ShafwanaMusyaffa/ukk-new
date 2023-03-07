@@ -22,19 +22,7 @@ class AssetController extends Controller
      */
     public function index()
     {
-        $assets = User::find(Auth::user()->id)->assets;
-
-        $assets->map(function ($asset){
-            if ($asset->lelang) {
-                $a = $asset->lelang->waktu_berakhir->diffInMinutes(now());
-                $b = $asset->lelang->waktu_berakhir->diffInMinutes($asset->lelang->created_at);
-                $asset->siswa_waktu_persen = ceil($a * 100 / $b);
-                $asset->siswa_waktu = $asset->lelang->waktu_berakhir->diffAsCarbonInterval(now());
-                return $asset;
-            } else {
-                return $asset->siswa_waktu = null;
-            }
-        });
+    $assets = Asset::latest()->paginate(3);
 
         return view('pages.admin.asset.index', compact('assets'));
     }
