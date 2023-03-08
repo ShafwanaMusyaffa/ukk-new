@@ -71,7 +71,7 @@
 
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                <span class="input-group-text"><i class="bi bi-calendar-event"></i></span>
                             </div>
                             <input type="date" value="{{ old('waktu_berakhir') }}" name="waktu_berakhir" class="form-control @error('waktu_berakhir') is-invalid @enderror" required>
                             @error('waktu_berakhir')
