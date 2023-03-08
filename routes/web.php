@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LelangController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,3 +67,4 @@ Route::resource('/lelang', LelangController::class)->only([
 Route::get('/admin/pengguna', [PenggunaController::class, 'index']);
 Route::delete('admin/pengguna/{u}', [PenggunaController::class, 'destroy'])->name('admin.pengguna.hapus');
 
+Route::get('/admin/admin', [AdminController::class, 'index']);

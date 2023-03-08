@@ -57,12 +57,12 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="/asset/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">Kevin</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2 class="text-capitalize"">{{Auth::user()->nama_lengkap;}}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
+              <h6 class="text-capitalize">{{Auth::user()->nama_lengkap;}}</h6>
               <span>Admin</span>
             </li>
             <li>
@@ -80,10 +80,13 @@
             </li> -->
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button type="submit" class="dropdown-item d-flex align-items-center">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Sign Out</span>
+                    </button>
+              </form>
             </li>
 
           </ul><!-- End Profile Dropdown Items -->
@@ -109,7 +112,7 @@
       <li class="nav-heading">Personalia</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/pages/admin/admin/">
+        <a class="nav-link collapsed" href="{{url('admin/admin')}}">
           <i class="bi bi-person-gear"></i>
           <span>Admin</span>
         </a>
@@ -123,7 +126,7 @@
       </li><!-- End Karyawan Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/pages/admin/pengguna/">
+        <a class="nav-link collapsed" href="{{url('admin/pengguna')}}">
           <i class="bi bi-people"></i>
           <span>Pengguna</span>
         </a>
@@ -138,7 +141,7 @@
             </a>
         </li><!-- End Pengguna Nav -->
 
-      
+
       <li class="nav-heading">Laporan</li>
 
       <li class="nav-item">
