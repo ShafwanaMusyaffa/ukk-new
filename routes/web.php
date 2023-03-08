@@ -8,6 +8,7 @@ use App\Http\Controllers\AssetController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LelangController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PenggunaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,12 +35,12 @@ require __DIR__.'/auth.php';
 // Route::get('/', function () {
     //     return view('welcome');
     // });
-    
+
 Route::middleware('auth')->group(function () {
     Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('/admin/assets', AssetController::class);
-    
+
 });
 
 Route::get('/', function () {
@@ -61,4 +62,7 @@ Route::delete('admin/lelang/{lelang}', [LelangController::class, 'akhiri'])->nam
 Route::resource('/lelang', LelangController::class)->only([
     'index', 'update', 'show'
 ]);
+
+Route::get('/admin/pengguna', [PenggunaController::class, 'index']);
+Route::delete('admin/pengguna/{u}', [PenggunaController::class, 'destroy'])->name('admin.pengguna.hapus');
 
