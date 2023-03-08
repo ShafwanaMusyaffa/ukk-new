@@ -26,7 +26,7 @@ class LelangController extends Controller
                         ->orderBy('harga_sekarang', 'desc')
                         ->get();
 
-        return view('lelang.index', ['lelang' => $lelang]);
+        return view('pages.admin.lelang.index', ['lelang' => $lelang]);
     }
 
     /**
@@ -42,7 +42,7 @@ class LelangController extends Controller
             redirect()->route('assets.index');
         }
 
-        return view('lelang.create', ['asset' => $asset]);
+        return view('pages.admin.lelang.create', ['asset' => $asset]);
     }
 
     /**
@@ -86,7 +86,7 @@ class LelangController extends Controller
     public function show(Lelang $lelang)
     {
         $penawaran = $lelang->orderBy('harga_sekarang', 'desc')->get();
-        return view('lelang.show', ['lelang' => $lelang, 'penawaran' => $penawaran]);
+        return view('pages.admin.lelang.show', ['lelang' => $lelang, 'penawaran' => $penawaran]);
     }
 
     /**
@@ -97,7 +97,7 @@ class LelangController extends Controller
      */
     public function tawar(Lelang $lelang)
     {
-        return view('lelang.tawar', ['lelang' => $lelang]);
+        return view('pages.admin.lelang.tawar', ['lelang' => $lelang]);
     }
 
     /**
@@ -134,15 +134,22 @@ class LelangController extends Controller
     public function akhiri(Lelang $lelang)
     {
         $lelang->status = false;
-        $lelang->save();
 
-    // Menentukan pemenang lelang
-        $penawaranTertinggi = $lelang->orderBy('harga_sekarang', 'desc')->first();
+        // Menentukan pemenang lelang
+        $penawaranTertinggi = $lelang->log->orderBy('harga_sekarang', 'desc')->first();
         if ($penawaranTertinggi) {
             $lelang->pemenang_id = $penawaranTertinggi->user_id;
-            $lelang->save();
         }
 
+        $lelang->save();
+
         return redirect()->route('lelang.index');
+    }
+
+    public function generateLaporan()
+    {
+        $lelangs = Lelang::all();
+
+        return view('pages.admin.laporan.laporan', compact('lelangs'));
     }
 }
