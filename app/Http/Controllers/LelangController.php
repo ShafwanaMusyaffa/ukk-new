@@ -135,10 +135,13 @@ class LelangController extends Controller
     {
         $lelang->status = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
         $lelang->save();
 
         // Cari harga tertinggi di dalam tabel lelang_logs untuk lelang ini
         $highestBid = Lelang_log::where('lelang_id', $lelang->id)->max('harga');
+=======
+>>>>>>> parent of 0d5abcc (up pemenang)
 =======
 >>>>>>> parent of 0d5abcc (up pemenang)
 
@@ -153,6 +156,7 @@ class LelangController extends Controller
         return redirect()->route('lelang.index');
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     // public function determineWinner($id)
     // {
@@ -190,6 +194,8 @@ class LelangController extends Controller
 
 
 
+=======
+>>>>>>> parent of 0d5abcc (up pemenang)
 =======
 >>>>>>> parent of 0d5abcc (up pemenang)
     public function generateLaporan()

@@ -49,6 +49,7 @@
                 </thead>
                 <tbody>
 <<<<<<< HEAD
+<<<<<<< HEAD
                   @if(count($lelangs) == 0)
                       <tr>
                           <td colspan="7" class="text-center">Tidak ada data lelang</td>
@@ -57,6 +58,9 @@
 
                     @foreach($lelangs as $lelang)
                     @if($lelang->status == false && $lelang->pemenang_id != null)
+=======
+                    @foreach($lelangs as $item)
+>>>>>>> parent of 0d5abcc (up pemenang)
 =======
                     @foreach($lelangs as $item)
 >>>>>>> parent of 0d5abcc (up pemenang)
