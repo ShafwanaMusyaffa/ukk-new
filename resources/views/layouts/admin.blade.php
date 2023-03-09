@@ -114,16 +114,9 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{url('admin/admin')}}">
           <i class="bi bi-person-gear"></i>
-          <span>Admin</span>
+          <span>Staff</span>
         </a>
       </li><!-- End Admin Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/pages/admin/karyawan/">
-          <i class="bi bi-person-vcard"></i>
-          <span>Karyawan</span>
-        </a>
-      </li><!-- End Karyawan Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{url('admin/pengguna')}}">

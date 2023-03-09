@@ -70,4 +70,5 @@ Route::resource('/lelang', LelangController::class)->only([
 Route::get('/admin/pengguna', [PenggunaController::class, 'index']);
 Route::delete('admin/pengguna/{u}', [PenggunaController::class, 'destroy'])->name('admin.pengguna.hapus');
 
-Route::get('/admin/admin', [AdminController::class, 'index']);
+// Route::get('/admin/admin', [AdminController::class, 'index']);
+Route::resource('admin.admin', AdminController::class);

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('no_telp', 13);
             $table->boolean('is_admin')->default(false);
+            $table->string('role')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

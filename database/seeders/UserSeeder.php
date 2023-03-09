@@ -17,9 +17,20 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
+            'nama_lengkap' => 'mimin',
+            'no_telp' => '0895636980792',
+            'is_admin' => 1,
+            'role' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('12345678'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('users')->insert([
             'nama_lengkap' => 'wanaa',
             'no_telp' => '0895636980792',
             'is_admin' => 1,
+            'role' => 'staff',
             'email' => 'wana@gmail.com',
             'password' => Hash::make('12345678'),
             'created_at' => now(),
@@ -28,7 +39,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'nama_lengkap' => 'nawa',
             'no_telp' => '0895636980792',
-            'is_admin' => 0, 
+            'is_admin' => 0,
             'email' => 'nawa@gmail.com',
             'password' => Hash::make('12345678'),
             'created_at' => now(),

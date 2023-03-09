@@ -6,13 +6,15 @@
 
       <div class="card-body">
         <h5 class="card-title">Pengguna</h5>
+        <a href="{{route('admin.admin.create')}}" class="btn btn-primary mb-4">Tambah Staff</a>
 
         <table id="table-pengguna" class="display">
           <thead>
               <tr>
                   <th>Nama</th>
-                  <th>Username</th>
+                  <th>Email</th>
                   <th>No. Handphone</th>
+                  <th>Jabatan</th>
                   <th></th>
               </tr>
           </thead>
@@ -22,6 +24,7 @@
                   <td class="text-capitalize">{{$user->nama_lengkap}}</td>
                   <td class="text-capitalize">{{$user->email}}</td>
                   <td class="text-capitalize"><a>{{$user->no_telp}}</a></td>
+                  <td class="text-capitalize"><a>{{$user->role}}</a></td>
                   <td>
                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDelete{{$user->id}}">
                         <i class="bi bi-trash"></i>
@@ -42,7 +45,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <form action="{{ route('admin.pengguna.hapus', $user->id) }}"
+                        <form action="{{ route('admin.admin.destroy', $user->id) }}"
                         method="POST">
                             @csrf
                             @method('delete')
