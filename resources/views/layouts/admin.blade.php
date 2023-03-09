@@ -132,6 +132,15 @@
         </a>
       </li><!-- End Pengguna Nav -->
 
+      <li class="nav-heading">Kategori</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('genre.index')}}">
+          <i class="bi bi-tags-fill"></i>
+          <span>Kategori</span>
+        </a>
+      </li><!-- End Kategori Nav -->
+
       <li class="nav-heading">Lelang</li>
 
         <li class="nav-item">
