@@ -78,9 +78,9 @@
           </div>
         </div>
       </div>
-        @if(!$lelang->status == false)
+        @if(!$lelang->status)
         <div class="card-footer">
-        <h5 class="text-center mb-0">Pemenang: {{ $lelang->logs->sortByDesc('harga')->first()->user->nama_lengkap }}</h5>
+        <h5 class="text-center mb-0">Pemenang: {{ $lelang->pemenang->nama_lengkap }}</h5>
         </div>
         @endif
 
