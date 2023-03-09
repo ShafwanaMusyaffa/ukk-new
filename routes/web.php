@@ -10,6 +10,7 @@ use App\Http\Controllers\LelangController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\GenreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('/admin/assets', AssetController::class);
+
+    Route::resource('genre', GenreController::class);
 
 });
 
