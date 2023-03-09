@@ -34,7 +34,7 @@
                       <button class="btn btn-sm btn-danger" type="submit" onclick="confirm('Yakin ingin mengakhiri lelang?')"> Akhiri lelang</button>
                     </form>
                     @else
-                    <h3 class="mb-2">Lelang telah selesai</h3>
+                    <h3 class="mb-2">Lelang telah dimenangkan oleh {{$lelang->pemenang->nama_lengkap}}</h3>
                   @endif
                 @else
                 @if($lelang->status)
@@ -47,7 +47,7 @@
                             <button type="submit" class="btn btn-primary">Tawarkan</button>
                         </form>
                 @else
-                  <h3 class="mb-2">Lelang telah selesai</h3>
+                  <h3 class="mb-2">Lelang telah dimenangkan oleh {{$lelang->pemenang->nama_lengkap}}</h3>
                 @endif
                 @endif
 

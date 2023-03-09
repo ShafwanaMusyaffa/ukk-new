@@ -42,7 +42,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <form action="{{ route('admin.pengguna.hapus', $user->id) }}"
+                        <form action="{{ route('admin.pengguna.destroy', $user->id) }}"
                         method="POST">
                             @csrf
                             @method('delete')

@@ -121,7 +121,7 @@
       @endif
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{url('admin/pengguna')}}">
+        <a class="nav-link collapsed" href="{{route('pengguna_admin.index')}}">
           <i class="bi bi-people"></i>
           <span>Pengguna</span>
         </a>

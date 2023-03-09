@@ -35,6 +35,16 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('assets', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
+        Schema::table('lelang', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropForeign(['pemenang_id']);
+        });
+        Schema::table('lelang_logs', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
         Schema::dropIfExists('users');
     }
 };
