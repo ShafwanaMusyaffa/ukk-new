@@ -47,6 +47,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                  @if(count($lelangs) == 0)
+                      <tr>
+                          <td colspan="7" class="text-center">Tidak ada data lelang</td>
+                      </tr>
+                  @else
+
                     @foreach($lelangs as $lelang)
                     @if($lelang->status == false && $lelang->pemenang_id != null)
                     <tr>
@@ -60,6 +66,7 @@
                     </tr>
                     @endif
                     @endforeach
+                  @endif
                 </tbody>
             </table>
 
