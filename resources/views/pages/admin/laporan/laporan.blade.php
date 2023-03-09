@@ -33,6 +33,7 @@
           </div>
         </div>
 
+        @foreach ($lelangs as $lelang)
             <h2>Data Lelang</h2>
             <table class="table table-bordered">
                 <thead>
@@ -47,6 +48,7 @@
                     </tr>
                 </thead>
                 <tbody>
+<<<<<<< HEAD
                   @if(count($lelangs) == 0)
                       <tr>
                           <td colspan="7" class="text-center">Tidak ada data lelang</td>
@@ -55,20 +57,23 @@
 
                     @foreach($lelangs as $lelang)
                     @if($lelang->status == false && $lelang->pemenang_id != null)
+=======
+                    @foreach($lelangs as $item)
+>>>>>>> parent of 0d5abcc (up pemenang)
                     <tr>
-                        <td>{{ $lelang->id }}</td>
-                        <td>{{ $lelang->asset->game }}</td>
-                        <td>{{ $lelang->created_at }}</td>
-                        <td>{{ $lelang->waktu_berakhir }}</td>
+                        <td>{{ $item->id }}</td>
+                        <td>{{ $item->asset->game }}</td>
+                        <td>{{ $item->created_at }}</td>
+                        <td>{{ $item->waktu_berakhir }}</td>
                         <td>Rp. {{ number_format($lelang->harga_awal, 2, ',', '.') }}</td>
                         <td>Rp. {{ number_format($lelang->harga_sekarang, 2, ',', '.') }}</td>
-                        <td>{{ $lelang->pemenang->nama_lengkap }}</td>
+                        <td>{{ $item->pemenang_id }}</td>
                     </tr>
-                    @endif
                     @endforeach
                   @endif
                 </tbody>
             </table>
+        @endforeach
 
       </div>
     </section>

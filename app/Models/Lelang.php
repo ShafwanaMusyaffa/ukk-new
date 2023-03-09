@@ -28,11 +28,6 @@ class Lelang extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function pemenang()
-    {
-        return $this->belongsTo(User::class, 'pemenang_id');
-    }
-    
     public function asset()
     {
         return $this->belongsTo(Asset::class);
