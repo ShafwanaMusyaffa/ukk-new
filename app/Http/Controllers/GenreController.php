@@ -33,6 +33,25 @@ class GenreController extends Controller
         return redirect()->route('genre.index')->with('pesan', 'Berhasil membuat genre');
     }
 
+    public function edit($id)
+    {
+        $genre = Genre::find($id);
+        return view('pages.admin.genre.edit', ['genre' => $genre]);
+    }
+
+    public function update(Request $request, Genre $genre)
+    {
+        $request->validate([
+            'genre' => 'required',
+        ]);
+
+        $genre->genre = $request->genre;
+
+        $genre->save();
+
+        return redirect()->route('genre.index')->with('pesan', 'Genre berhasil di ubah');
+    }
+
     public function destroy($id)
     {
         $genre = Genre::find($id);
