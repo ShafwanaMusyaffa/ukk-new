@@ -190,13 +190,11 @@ class LelangController extends Controller
 
 
 
-
-
     public function generateLaporan()
     {
         $users = User::all();
         $lelangs = Lelang::all();
 
-        return view('pages.admin.laporan.laporan', compact('lelangs', 'users'));
+        return view('pages.admin.laporan.index', compact('lelangs', 'users'));
     }
 }
