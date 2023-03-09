@@ -18,6 +18,7 @@
             </div>
             <div class="card-body">
                 <div class="">
+                    <img src="{{ asset('storage/image/'.$asset->image) }}" alt="{{ $asset->game }}" class="h-100">
                     <h3 class="text-secondary"><i class="fas fa-paint-brush"></i>{{ $asset->game }}</h3>
                     <p class="text-muted">{{ $asset->deskripsi }}</p>
 

@@ -9,7 +9,7 @@
             <div class="col-12 col-md-4">
               <div class="w-100 ratio ratio-1x1 overflow-hidden rounded-3">
                 <div class="w-100">
-                  <img src="/assets/img/card.jpg" alt="" class="h-100">
+                  <img src="{{ asset('storage/image/'.$lelang->asset->image) }}" alt="{{ $lelang->asset->game }}" class="h-100">
                 </div>
               </div>
             </div>
@@ -17,7 +17,7 @@
               <h1 class="fw-bold">{{ $lelang->asset->game }}</h1>
               <span class="badge bg-warning mb-2">
                 <i class="bi bi-clock me-1"></i>
-                1 Hari
+                {{ $lelang->waktu_berakhir->format('d M Y') }}
               </span>
               <p class="mb-0 text-black">Penawaran Tertinggi</p>
               <h4 class="fw-bold">Rp. {{ number_format($lelang->harga_sekarang, 2, ',', '.') }}</h4>

@@ -25,7 +25,7 @@
             <div class="card shadow-sm mb-0">
                 <div class="overflow-hidden ratio ratio-1x1 rounded-start">
                     <div>
-                      <img src="/assets/img/card.jpg" class="h-100" alt="{{ $asset->game }}">
+                      <img src="{{ asset('storage/image/'.$asset->image) }}" class="h-100" alt="{{ $asset->game }}">
                     </div>
                 </div>
                 <div class="card-body">
