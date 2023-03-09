@@ -27,11 +27,13 @@
               <div class="mt-4">
                 <h3 class="mb-2">Lelang Sekarang</h3>
                     @if(Auth::user()->id == $lelang->user->id)
-                    <form action="{{ route('lelang.akhiri', $lelang->id) }}" method="post">
-                        @csrf
-                        @method('delete')
-                        <button class="btn btn-sm btn-danger" type="submit" onclick="confirm('Yakin ingin mengakhiri lelang?')"> Akhiri lelang</button>
-                    </form>
+                        @if(!$lelang->status)
+                          <form action="{{ route('lelang.akhiri', $lelang->id) }}" method="post">
+                              @csrf
+                              @method('delete')
+                              <button class="btn btn-sm btn-danger" type="submit" onclick="confirm('Yakin ingin mengakhiri lelang?')"> Akhiri lelang</button>
+                          </form>
+                        @endif
 
                     @else
                         <form action="{{ route('lelang.update', $lelang->id) }}" class="d-flex w-100 justify-content-between gap-2" method="post">
