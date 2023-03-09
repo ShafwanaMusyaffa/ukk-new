@@ -49,6 +49,7 @@
                 @else
                   <h3 class="mb-2">Lelang telah selesai</h3>
                 @endif
+                @endif
 
               </div>
             </div>
