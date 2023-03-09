@@ -12,7 +12,7 @@ class AssetController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth:admin');
     }
 
     /**
@@ -60,7 +60,7 @@ class AssetController extends Controller
         $asset->game = $request->game;
         $asset->identifier = $request->identifier;
         $asset->deskripsi = $request->deskripsi;
-        
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $namaImage = time().'.'.$image->getClientOriginalExtension();
@@ -113,6 +113,7 @@ class AssetController extends Controller
     {
         $request->validate([
             'game' => 'required',
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'identifier' => 'required',
             'deskripsi' => 'required',
             'genre' => 'required',
@@ -122,6 +123,15 @@ class AssetController extends Controller
         $asset->identifier = $request->identifier;
         $asset->deskripsi = $request->deskripsi;
 
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $namaImage = time().'.'.$image->getClientOriginalExtension();
+            $image->storeAs('public/image', $namaImage);
+            $asset->image = $namaImage;
+        }
+
+
         $asset->save();
 
         // Relasi Asset dan genre
@@ -130,7 +140,7 @@ class AssetController extends Controller
             $asset->genres()->attach($genre);
         }
 
-        return redirect()->route('assets.show', [$asset->id])->with('pesan', 'Asset berhasil di ubah');
+        return redirect()->route('assets.index', [$asset->id])->with('pesan', 'Asset berhasil di ubah');
     }
 
     /**
