@@ -48,6 +48,7 @@ class AssetController extends Controller
     {
         $request->validate([
             'game' => 'required',
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'identifier' => 'required',
             'deskripsi' => 'required',
             'genre' => 'required',
