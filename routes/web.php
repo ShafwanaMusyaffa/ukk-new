@@ -36,14 +36,16 @@ require __DIR__.'/auth.php';
 // Route::get('/', function () {
     //     return view('welcome');
     // });
+require __DIR__.'/adminauth.php';
 
 Route::middleware('auth:admin')->group(function () {
-    Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
+    Route::prefix('admin')->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::resource('/assets', AssetController::class);
+        Route::get('lelang/create/{asset}', [LelangController::class, 'create'])->name('lelang.create');
 
-    Route::resource('/admin/assets', AssetController::class);
-
+    });
 });
-require __DIR__.'/adminauth.php';
 
 
 Route::get('/', function () {
@@ -57,7 +59,6 @@ Route::get('/u/{u}/pro', [UserController::class, 'promote'])->name('u.promote');
 Route::get('/u/{u}/dem', [UserController::class, 'demote'])->name('u.demote');
 
 
-Route::get('admin/lelang/create/{asset}', [LelangController::class, 'create'])->name('lelang.create');
 Route::get('admin/laporan   ', [LelangController::class, 'generateLaporan'])->name('lelang.laporan');
 Route::post('admin/lelang/{asset}', [LelangController::class, 'store'])->name('lelang.store');
 Route::get('/lelang/{lelang}/tawar', [LelangController::class, 'tawar'])->name('lelang.tawar');
