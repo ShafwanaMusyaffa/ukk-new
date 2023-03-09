@@ -111,19 +111,21 @@
 
       <li class="nav-heading">Personalia</li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{{url('admin/admin')}}">
-          <i class="bi bi-person-gear"></i>
-          <span>Admin</span>
-        </a>
-      </li><!-- End Admin Nav -->
+      @if (auth::user()->role == "admin")
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{url('admin/admin')}}">
+            <i class="bi bi-person-gear"></i>
+            <span>Admin</span>
+            </a>
+        </li><!-- End Admin Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{{url('admin/karyawan')}}">
-          <i class="bi bi-person-vcard"></i>
-          <span>Karyawan</span>
-        </a>
-      </li><!-- End Karyawan Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{url('admin/karyawan')}}">
+            <i class="bi bi-person-vcard"></i>
+            <span>Karyawan</span>
+            </a>
+        </li><!-- End Karyawan Nav -->
+      @endif
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{url('admin/pengguna')}}">
