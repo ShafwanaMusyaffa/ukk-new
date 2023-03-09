@@ -111,12 +111,14 @@
 
       <li class="nav-heading">Personalia</li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{{url('admin/admin')}}">
-          <i class="bi bi-person-gear"></i>
-          <span>Staff</span>
-        </a>
-      </li><!-- End Admin Nav -->
+      @if (Auth::user()->role == 'admin')
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{url('admin/admin')}}">
+            <i class="bi bi-person-gear"></i>
+            <span>Staff</span>
+            </a>
+        </li><!-- End Admin Nav -->
+      @endif
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{url('admin/pengguna')}}">
