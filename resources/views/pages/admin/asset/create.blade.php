@@ -16,7 +16,7 @@
       <div class="card recent-sales overflow-auto">
         <div class="card-body">
           <h5 class="card-title">Tambah Produk</h5>
-            <form action="{{ route('assets.store') }}" method="post">
+            <form action="{{ route('assets.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row g-3">
 
@@ -47,12 +47,12 @@
 
                     </div>
                     </div>
-                    {{-- <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-6">
                     <div>
                         <label for="formFile" class="form-label">Foto Produk</label>
-                        <input class="form-control" type="file" id="formFile">
+                        <input class="form-control" type="file" name="image" id="formFile">
                     </div>
-                    </div> --}}
+                    </div>
                     <div class="col-12 col-md-6">
                     <div>
                         <label for="tutupLelang" class="form-label">Kategori</label>
