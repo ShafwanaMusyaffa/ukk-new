@@ -23,7 +23,7 @@
                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDelete{{$genre->id}}">
                         <i class="bi bi-trash"></i>
                     </button>
-                    <a href="{{ url('/admin/karyawan/' . $genre->id) }}" class="btn btn-primary btn-sm">
+                    <a href="{{ route('genre.edit', $genre->id) }}" class="btn btn-primary btn-sm">
                       <i class="bi bi-pencil-square"></i>
                     </a>
                   </td>
