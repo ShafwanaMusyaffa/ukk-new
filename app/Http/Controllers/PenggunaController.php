@@ -17,7 +17,7 @@ class PenggunaController extends Controller
 
     public function index()
     {
-        $users = User::where('is_admin', 0)->get();
+        $users = User::all();
         return view('pages.admin.pengguna.index', ['users' => $users]);
     }
 

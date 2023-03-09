@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\Auth;
 
 class LelangController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:admin');
+    // }
 
     /**
      * Display a listing of the resource.
@@ -138,7 +138,7 @@ class LelangController extends Controller
         // Set status lelang menjadi false
         $lelang->status = false;
         $lelang->save();
-        
+
         // Cari harga tertinggi di dalam tabel lelang_logs untuk lelang ini
         $highestBid = Lelang_log::where('lelang_id', $lelang->id)->max('harga');
 
@@ -160,23 +160,23 @@ class LelangController extends Controller
     // public function determineWinner($id)
     // {
     //     $lelang = Lelang::findOrFail($id);
-        
+
     //     // Cek apakah status lelang sudah berakhir atau belum
     //     if ($lelang->status) {
     //         return redirect()->back()->with('error', 'Status lelang belum berakhir.');
     //     }
-        
+
     //     // Cari harga tertinggi di dalam tabel lelang_logs untuk lelang ini
     //     $highestBid = Lelang_log::where('lelang_id', $lelang->id)->max('harga');
-        
+
     //     if (!is_null($highestBid)) {
     //         // Cari user dengan harga tertinggi
     //         $pemenang = Lelang_log::where('lelang_id', $lelang->id)->where('harga', $highestBid)->first()->user;
-            
+
     //         // Update pemenang di dalam tabel lelang
     //         $lelang->pemenang_id = $pemenang->id;
     //         $lelang->save();
-            
+
     //         return redirect()->back()->with('success', 'Pemenang lelang telah ditentukan.');
     //     } else {
     //         return redirect()->back()->with('error', 'Tidak ada tawaran di dalam lelang ini.');
