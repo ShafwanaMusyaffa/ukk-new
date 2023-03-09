@@ -12,7 +12,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $user = User::where('is_admin', 0)->get()->count();
+        $user = User::all()->count();
         $lelang = Lelang::where('status', 1)->get();
         $asset = Asset::all();
         return view('pages.admin.dashboard', [

@@ -37,12 +37,14 @@ require __DIR__.'/auth.php';
     //     return view('welcome');
     // });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:admin')->group(function () {
     Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('/admin/assets', AssetController::class);
 
 });
+require __DIR__.'/adminauth.php';
+
 
 Route::get('/', function () {
     return view('pages.home');
