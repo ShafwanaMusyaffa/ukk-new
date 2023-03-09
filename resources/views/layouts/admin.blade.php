@@ -173,7 +173,7 @@
 
   </aside><!-- End Sidebar-->
 
-  <main id="main" class="main">
+  <main id="main" class="main min-vh-100">
 
     @yield('content')
 

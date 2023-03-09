@@ -42,7 +42,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('/assets', AssetController::class);
-        Route::get('lelang/create/{asset}', [LelangController::class, 'create'])->name('lelang.create');
+        Route::get('lelang/create/{asset}', [LelangController::class, 'create'])->middleware('auth:admin')->name('lelang.create');
 
         Route::get('admin', [AdminController::class, 'index']);
         Route::delete('admin/{u}', [AdminController::class, 'destroy'])->name('admin.admin.hapus');
@@ -68,7 +68,7 @@ Route::get('/u/{u}/pro', [UserController::class, 'promote'])->name('u.promote');
 Route::get('/u/{u}/dem', [UserController::class, 'demote'])->name('u.demote');
 
 
-Route::post('admin/lelang/{asset}', [LelangController::class, 'store'])->name('lelang.store');
+Route::post('admin/lelang/{asset}', [LelangController::class, 'store'])->middleware('auth:admin')->name('lelang.store');
 Route::get('/lelang/{lelang}/tawar', [LelangController::class, 'tawar'])->name('lelang.tawar');
 Route::delete('admin/lelang/{lelang}', [LelangController::class, 'akhiri'])->name('lelang.akhiri');
 Route::resource('/lelang', LelangController::class)->only([
