@@ -33,7 +33,6 @@
           </div>
         </div>
 
-        @foreach ($lelangs as $lelang)
             <h2>Data Lelang</h2>
             <table class="table table-bordered">
                 <thead>
@@ -48,20 +47,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($lelangs as $item)
+                    @foreach($lelangs as $lelang)
+                    @if($lelang->status == false && $lelang->pemenang_id != null)
                     <tr>
-                        <td>{{ $item->id }}</td>
-                        <td>{{ $item->asset->game }}</td>
-                        <td>{{ $item->created_at }}</td>
-                        <td>{{ $item->waktu_berakhir }}</td>
+                        <td>{{ $lelang->id }}</td>
+                        <td>{{ $lelang->asset->game }}</td>
+                        <td>{{ $lelang->created_at }}</td>
+                        <td>{{ $lelang->waktu_berakhir }}</td>
                         <td>Rp. {{ number_format($lelang->harga_awal, 2, ',', '.') }}</td>
                         <td>Rp. {{ number_format($lelang->harga_sekarang, 2, ',', '.') }}</td>
-                        <td>{{ $item->pemenang_id }}</td>
+                        <td>{{ $lelang->pemenang->nama_lengkap }}</td>
                     </tr>
+                    @endif
                     @endforeach
                 </tbody>
             </table>
-        @endforeach
 
       </div>
     </section>

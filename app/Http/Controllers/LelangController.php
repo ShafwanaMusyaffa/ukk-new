@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Asset;
 use App\Models\Lelang;
 use App\Models\Lelang_log;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class LelangController extends Controller
@@ -133,23 +135,69 @@ class LelangController extends Controller
      */
     public function akhiri(Lelang $lelang)
     {
+        // Set status lelang menjadi false
         $lelang->status = false;
+        $lelang->save();
+        
+        // Cari harga tertinggi di dalam tabel lelang_logs untuk lelang ini
+        $highestBid = Lelang_log::where('lelang_id', $lelang->id)->max('harga');
 
-        // Menentukan pemenang lelang
-        $penawaranTertinggi = $lelang->log->orderBy('harga_sekarang', 'desc')->first();
-        if ($penawaranTertinggi) {
-            $lelang->pemenang_id = $penawaranTertinggi->user_id;
+        if (!is_null($highestBid)) {
+            // Cari user dengan harga tertinggi
+            $pemenang = Lelang_log::where('lelang_id', $lelang->id)->where('harga', $highestBid)->first()->user;
+
+            // Update pemenang di dalam tabel lelang
+            $lelang->pemenang_id = $pemenang->id;
+            $lelang->save();
+
+            return redirect()->route('lelang.index')->with('success', 'Lelang telah diakhiri, pemenang telah ditentukan.');
+        } else {
+            return redirect()->route('lelang.index')->with('error', 'Tidak ada tawaran di dalam lelang ini.');
         }
 
-        $lelang->save();
-
-        return redirect()->route('lelang.index');
     }
+
+    // public function determineWinner($id)
+    // {
+    //     $lelang = Lelang::findOrFail($id);
+        
+    //     // Cek apakah status lelang sudah berakhir atau belum
+    //     if ($lelang->status) {
+    //         return redirect()->back()->with('error', 'Status lelang belum berakhir.');
+    //     }
+        
+    //     // Cari harga tertinggi di dalam tabel lelang_logs untuk lelang ini
+    //     $highestBid = Lelang_log::where('lelang_id', $lelang->id)->max('harga');
+        
+    //     if (!is_null($highestBid)) {
+    //         // Cari user dengan harga tertinggi
+    //         $pemenang = Lelang_log::where('lelang_id', $lelang->id)->where('harga', $highestBid)->first()->user;
+            
+    //         // Update pemenang di dalam tabel lelang
+    //         $lelang->pemenang_id = $pemenang->id;
+    //         $lelang->save();
+            
+    //         return redirect()->back()->with('success', 'Pemenang lelang telah ditentukan.');
+    //     } else {
+    //         return redirect()->back()->with('error', 'Tidak ada tawaran di dalam lelang ini.');
+    //     }
+    // }
+
+
+    public function pemenang()
+    {
+        return view('pages.admin.pemenang');
+    }
+
+
+
+
 
     public function generateLaporan()
     {
+        $users = User::all();
         $lelangs = Lelang::all();
 
-        return view('pages.admin.laporan.laporan', compact('lelangs'));
+        return view('pages.admin.laporan.laporan', compact('lelangs', 'users'));
     }
 }
