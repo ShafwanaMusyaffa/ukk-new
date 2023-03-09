@@ -47,19 +47,11 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::get('/', function () {
-    return view('pages.home');
-});
-
-
-Route::resource('/u', UserController::class);
-
-Route::get('/u/{u}/pro', [UserController::class, 'promote'])->name('u.promote');
-Route::get('/u/{u}/dem', [UserController::class, 'demote'])->name('u.demote');
-
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('admin/lelang/create/{asset}', [LelangController::class, 'create'])->name('lelang.create');
-Route::get('admin/laporan', [LelangController::class, 'generateLaporan'])->name('lelang.laporan');
+Route::get('admin/laporan/download', [LelangController::class, 'generateLaporan'])->name('laporan.download');
+Route::get('admin/laporan', [LelangController::class, 'laporan'])->name('lelang.laporan');
 Route::post('admin/lelang/{asset}', [LelangController::class, 'store'])->name('lelang.store');
 Route::get('/lelang/{lelang}/tawar', [LelangController::class, 'tawar'])->name('lelang.tawar');
 Route::delete('admin/lelang/{lelang}', [LelangController::class, 'akhiri'])->name('lelang.akhiri');
@@ -67,7 +59,7 @@ Route::resource('/lelang', LelangController::class)->only([
     'index', 'update', 'show'
 ]);
 
-Route::resource('admin.admin', AdminController::class);
+Route::get('/admin/pengguna', [PenggunaController::class, 'index']);
+Route::delete('admin/pengguna/{u}', [PenggunaController::class, 'destroy'])->name('admin.pengguna.hapus');
 
-Route::get('admin/pengguna', [PenggunaController::class, 'index'])->name('pengguna_admin.index');
-Route::delete('admin/pengguna/{pengguna}/delete', [PenggunaController::class, 'destroy'])->name(('admin.pengguna.destroy'));
+Route::get('/admin/admin', [AdminController::class, 'index']);
