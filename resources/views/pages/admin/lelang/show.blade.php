@@ -25,17 +25,19 @@
                 {{ $lelang->asset->deskripsi }}
               </p>
               <div class="mt-4">
-                <h3 class="mb-2">Lelang Sekarang</h3>
-                    @if(Auth::user()->id == $lelang->user->id)
-                        @if(!$lelang->status)
-                          <form action="{{ route('lelang.akhiri', $lelang->id) }}" method="post">
-                              @csrf
-                              @method('delete')
-                              <button class="btn btn-sm btn-danger" type="submit" onclick="confirm('Yakin ingin mengakhiri lelang?')"> Akhiri lelang</button>
-                          </form>
-                        @endif
-
+                @if(Auth::user()->id == $lelang->user->id)
+                  @if($lelang->status)
+                    <h3 class="mb-2">Lelang Sekarang</h3>
+                    <form action="{{ route('lelang.akhiri', $lelang->id) }}" method="post">
+                      @csrf
+                      @method('delete')
+                      <button class="btn btn-sm btn-danger" type="submit" onclick="confirm('Yakin ingin mengakhiri lelang?')"> Akhiri lelang</button>
+                    </form>
                     @else
+                    <h3 class="mb-2">Lelang telah selesai</h3>
+                  @endif
+                @else
+                <h3 class="mb-2">Lelang Sekarang</h3>
                         <form action="{{ route('lelang.update', $lelang->id) }}" class="d-flex w-100 justify-content-between gap-2" method="post">
                             @csrf
                             @method('put')
@@ -82,7 +84,7 @@
       </div>
         @if(!$lelang->status)
         <div class="card-footer">
-        <h5 class="text-center mb-0">Pemenang: {{ $lelang->pemenang->nama_lengkap }}</h5>
+        {{-- <h5 class="text-center mb-0">Pemenang: {{ $lelang->pemenang->nama_lengkap }}</h5> --}}
         </div>
         @endif
 
