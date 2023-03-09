@@ -60,6 +60,13 @@ class AssetController extends Controller
         $asset->game = $request->game;
         $asset->identifier = $request->identifier;
         $asset->deskripsi = $request->deskripsi;
+        
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $namaImage = time().'.'.$image->getClientOriginalExtension();
+            $image->storeAs('public/image', $namaImage);
+            $asset->image = $namaImage;
+        }
 
         $asset->save();
 
