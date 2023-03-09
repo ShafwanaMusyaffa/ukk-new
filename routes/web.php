@@ -56,7 +56,7 @@ Route::get('/u/{u}/dem', [UserController::class, 'demote'])->name('u.demote');
 
 
 Route::get('admin/lelang/create/{asset}', [LelangController::class, 'create'])->name('lelang.create');
-Route::get('admin/laporan   ', [LelangController::class, 'generateLaporan'])->name('lelang.laporan');
+Route::get('admin/laporan', [LelangController::class, 'generateLaporan'])->name('lelang.laporan');
 Route::post('admin/lelang/{asset}', [LelangController::class, 'store'])->name('lelang.store');
 Route::get('/lelang/{lelang}/tawar', [LelangController::class, 'tawar'])->name('lelang.tawar');
 Route::delete('admin/lelang/{lelang}', [LelangController::class, 'akhiri'])->name('lelang.akhiri');
