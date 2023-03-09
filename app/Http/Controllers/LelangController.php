@@ -39,8 +39,9 @@ class LelangController extends Controller
      */
     public function create(Asset $asset)
     {
+        $user_id = Auth::user()->id;
         // filter id nya
-        if ($asset->user->id != Auth::user()->id) {
+        if ($asset->user->id != $user_id) {
             redirect()->route('assets.index');
         }
 

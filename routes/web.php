@@ -58,9 +58,8 @@ Route::middleware('auth:admin')->group(function () {
 });
 
 
-Route::get('/', function () {
-    return view('pages.home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('homepage');
+
 
 
 Route::resource('/u', UserController::class);
