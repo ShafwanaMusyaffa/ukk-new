@@ -16,12 +16,12 @@ class CreateAssetsTable extends Migration
         Schema::create('assets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('game', 128);
-            $table->string('identifier', 128);
+            $table->string('image');
+            $table->string('game');
+            $table->string('identifier');
             $table->text('deskripsi');
-            $table->timestamps();
-
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
