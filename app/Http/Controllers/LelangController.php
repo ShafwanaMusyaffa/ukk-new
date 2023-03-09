@@ -24,8 +24,7 @@ class LelangController extends Controller
      */
     public function index()
     {
-        $lelang = Lelang::where('status', 1)
-                        ->orderBy('harga_sekarang', 'desc')
+        $lelang = Lelang::orderBy('harga_sekarang', 'desc')
                         ->get();
 
         return view('pages.admin.lelang.index', ['lelang' => $lelang]);
