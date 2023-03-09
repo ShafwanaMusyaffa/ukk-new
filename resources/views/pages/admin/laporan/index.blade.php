@@ -1,26 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>LAPORAN PELELANGAN</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-    <!-- <link
-      href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,700"
-      rel="stylesheet"
-      type="text/css"
-    />
-
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    /> -->
-    <link href="/asset/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
-
-</head>
-
-<body>
+@extends('layouts.admin')
+@section('content')
+    <section class="p-4">
+        <h3>Data Laporan Produk</h3>
+        <a href="{{ route('laporan.download') }}">
+            <button class="btn btn-sm btn-primary" style="width: fit-content">
+                <span>Generate Laporan</span>
+            </button>
+        </a>
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center my-5">
@@ -62,7 +48,5 @@
 
         </div>
     </section>
-
-</body>
-
-</html>
+    </section>
+@endsection

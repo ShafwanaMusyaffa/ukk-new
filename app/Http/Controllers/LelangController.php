@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Asset;
 use App\Models\Lelang;
+use PDF;
 use App\Models\Lelang_log;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -183,18 +184,23 @@ class LelangController extends Controller
     // }
 
 
-    public function pemenang()
+
+    public function laporan()
     {
-        return view('pages.admin.pemenang');
+        $users = User::all();
+        $lelangs = Lelang::all();
+
+        return view('pages.admin.laporan.index', compact('lelangs', 'users'));
     }
-
-
 
     public function generateLaporan()
     {
         $users = User::all();
         $lelangs = Lelang::all();
 
-        return view('pages.admin.laporan.index', compact('lelangs', 'users'));
+
+        $pdf = PDF::loadView('pages.admin.laporan.laporan', [ 'users' => $users, 'lelangs' => $lelangs]);
+
+        return $pdf->download('laporan.pdf'); 
     }
 }

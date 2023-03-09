@@ -1,70 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>LAPORAN PELELANGAN</title>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Laporan Pelelangan</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
 
-    <!-- <link
-      href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,700"
-      rel="stylesheet"
-      type="text/css"
-    />
-
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    /> -->
-  <link href="/asset/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
-
-  </head>
-  <body>
-    <section class="ftco-section">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-6 text-center mb-5">
-            <h2 class="heading-section" style="width: 100%">
-              LAPORAN PELELANGAN
-            </h2>
-            <h2 class="heading-section">{{ $date = now()->format('d-m-Y') }}</h2>
-          </div>
-        </div>
-
-            <h2>Data Lelang</h2>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>ID Lelang</th>
-                        <th>Nama Barang</th>
-                        <th>Tanggal Mulai</th>
-                        <th>Tanggal Berakhir</th>
-                        <th>Harga Awal</th>
-                        <th>Harga Tertinggi</th>
-                        <th>Pemenang</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($lelangs as $lelang)
-                    @if($lelang->status == false && $lelang->pemenang_id != null)
-                    <tr>
-                        <td>{{ $lelang->id }}</td>
-                        <td>{{ $lelang->asset->game }}</td>
-                        <td>{{ $lelang->created_at }}</td>
-                        <td>{{ $lelang->waktu_berakhir }}</td>
-                        <td>Rp. {{ number_format($lelang->harga_awal, 2, ',', '.') }}</td>
-                        <td>Rp. {{ number_format($lelang->harga_sekarang, 2, ',', '.') }}</td>
-                        <td>{{ $lelang->pemenang->nama_lengkap }}</td>
-                    </tr>
-                    @endif
-                    @endforeach
-                </tbody>
-            </table>
-
-      </div>
-    </section>
-
-  </body>
+        th, td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Laporan Pelelangan</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nama Barang</th>
+                <th>Tanggal Mulai</th>
+                <th>Tanggal Berakhir</th>
+                <th>Harga Awal</th>
+                <th>Harga Tertinggi</th>
+                <th>Pemenang</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($lelangs as $lelang)
+            <tr>
+                <td>{{ $lelang->id }}</td>
+                <td>{{ $lelang->asset->game }}</td>
+                <td>{{ $lelang->created_at->format('d M Y') }}</td>
+                <td>{{ $lelang->waktu_berakhir->format('d M Y') }}</td>
+                <td>Rp. {{ number_format($lelang->harga_awal, 2, ',', '.') }}</td>
+                <td>Rp. {{ number_format($lelang->harga_sekarang, 2, ',', '.') }}</td>
+                <td>{{ $lelang->pemenang->nama_lengkap }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</body>
 </html>
