@@ -37,6 +37,7 @@
                     <h3 class="mb-2">Lelang telah selesai</h3>
                   @endif
                 @else
+                @if($lelang->status)
                 <h3 class="mb-2">Lelang Sekarang</h3>
                         <form action="{{ route('lelang.update', $lelang->id) }}" class="d-flex w-100 justify-content-between gap-2" method="post">
                             @csrf
@@ -45,7 +46,9 @@
                             <input type="number" class="form-control" id="harga_awal" name="harga_tawaran" placeholder="Rp. 20000">
                             <button type="submit" class="btn btn-primary">Tawarkan</button>
                         </form>
-                    @endif
+                @else
+                  <h3 class="mb-2">Lelang telah selesai</h3>
+                @endif
 
               </div>
             </div>
