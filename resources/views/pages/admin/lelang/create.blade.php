@@ -17,7 +17,8 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="">
+                <div class="overflow-hidden">
+                    <img src="{{ asset('storage/image/'.$asset->image) }}" alt="{{ $asset->game }}" class="w-100 mb-2">
                     <h3 class="text-secondary"><i class="fas fa-paint-brush"></i>{{ $asset->game }}</h3>
                     <p class="text-muted">{{ $asset->deskripsi }}</p>
 
