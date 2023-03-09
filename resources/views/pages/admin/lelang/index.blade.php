@@ -10,7 +10,7 @@
                     <div class="card shadow-sm">
                     <div class="w-100 ratio ratio-1x1 overflow-hidden">
                         <span>
-                        <img src="/asset/img/card.jpg" alt="{{ $lelang->asset->game }}" class="h-100">
+                        <img src="{{ asset('storage/image/'.$lelang->asset->image) }}" alt="{{ $lelang->asset->game }}" class="h-100">
                         </span>
                     </div>
                     <div class="card-body">
