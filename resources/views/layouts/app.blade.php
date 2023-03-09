@@ -42,7 +42,7 @@
         <a class="navbar-brand fw-bold" href="#">
           <img src="/asset/img/logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top me-1">
           Lelang
-        </a>    
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -61,7 +61,7 @@
         @if (Auth::user())
         <button type="button" class="btn btn-outline-primary dropdown-toggle text-capitalize" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="bi bi-person-circle me-1"></i>
-            {{ Auth::user()->nama_lengkap }}
+            {{ Auth::user()->name }}
         </button>
         <div class="btn-group">
             <ul class="dropdown-menu dropdown-menu-end">
@@ -126,7 +126,7 @@
   </main>
   <!-- End #main -->
 
-  
+
 
 
 

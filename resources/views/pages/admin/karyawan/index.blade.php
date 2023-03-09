@@ -16,31 +16,31 @@
               </tr>
           </thead>
           <tbody>
-            @foreach ($admins as $admin)
+            @foreach ($karyawans as $karyawan)
               <tr>
-                  <td class="text-capitalize">{{$admin->name}}</td>
-                  <td class="text-capitalize">{{$admin->email}}</td>
+                  <td class="text-capitalize">{{$karyawan->name}}</td>
+                  <td class="text-capitalize">{{$karyawan->email}}</td>
                   <td>
-                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDelete{{$admin->id}}">
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalDelete{{$karyawan->id}}">
                         <i class="bi bi-trash"></i>
                     </button>
-                    <a href="{{ url('/admin/karyawan/' . $admin->id) }}" class="btn btn-primary btn-sm">
+                    <a href="{{ url('/admin/karyawan/' . $karyawan->id) }}" class="btn btn-primary btn-sm">
                       <i class="bi bi-pencil-square"></i>
                     </a>
                   </td>
               </tr>
 
               {{-- Modal --}}
-              <div class="modal fade" id="modalDelete{{$admin->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal fade" id="modalDelete{{$karyawan->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="modalDelete{{$admin->id}}">Yakin akan menghapus admin {{$admin->name}}</h1>
+                      <h1 class="modal-title fs-5" id="modalDelete{{$karyawan->id}}">Yakin akan menghapus karyawan {{$karyawan->name}}</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <form action="{{ route('admin.karyawan.hapus', $admin->id) }}"
+                        <form action="{{ route('admin.karyawan.hapus', $karyawan->id) }}"
                         method="POST">
                             @csrf
                             @method('delete')

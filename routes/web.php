@@ -44,6 +44,16 @@ Route::middleware('auth:admin')->group(function () {
         Route::resource('/assets', AssetController::class);
         Route::get('lelang/create/{asset}', [LelangController::class, 'create'])->name('lelang.create');
 
+        Route::get('admin', [AdminController::class, 'index']);
+        Route::delete('admin/{u}', [AdminController::class, 'destroy'])->name('admin.admin.hapus');
+
+        Route::get('karyawan', [AdminController::class, 'indexkaryawan']);
+        Route::delete('karyawan/{u}', [AdminController::class, 'destroykaryawan'])->name('admin.karyawan.hapus');
+
+        Route::get('pengguna', [PenggunaController::class, 'index']);
+        Route::delete('pengguna/{u}', [PenggunaController::class, 'destroy'])->name('admin.pengguna.hapus');
+
+        Route::get('laporan   ', [LelangController::class, 'generateLaporan'])->name('lelang.laporan');
     });
 });
 
@@ -59,7 +69,6 @@ Route::get('/u/{u}/pro', [UserController::class, 'promote'])->name('u.promote');
 Route::get('/u/{u}/dem', [UserController::class, 'demote'])->name('u.demote');
 
 
-Route::get('admin/laporan   ', [LelangController::class, 'generateLaporan'])->name('lelang.laporan');
 Route::post('admin/lelang/{asset}', [LelangController::class, 'store'])->name('lelang.store');
 Route::get('/lelang/{lelang}/tawar', [LelangController::class, 'tawar'])->name('lelang.tawar');
 Route::delete('admin/lelang/{lelang}', [LelangController::class, 'akhiri'])->name('lelang.akhiri');
@@ -67,7 +76,4 @@ Route::resource('/lelang', LelangController::class)->only([
     'index', 'update', 'show'
 ]);
 
-Route::get('/admin/pengguna', [PenggunaController::class, 'index']);
-Route::delete('admin/pengguna/{u}', [PenggunaController::class, 'destroy'])->name('admin.pengguna.hapus');
 
-Route::get('/admin/admin', [AdminController::class, 'index']);

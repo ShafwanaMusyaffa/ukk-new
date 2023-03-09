@@ -119,7 +119,7 @@
       </li><!-- End Admin Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/pages/admin/karyawan/">
+        <a class="nav-link collapsed" href="{{url('admin/karyawan')}}">
           <i class="bi bi-person-vcard"></i>
           <span>Karyawan</span>
         </a>
